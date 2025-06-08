@@ -47,6 +47,10 @@ java -jar -Dspring.config.location=local-env/prices-api/application.yml target/p
 In this case, we are using the same configuration file that is prepared for the local-environment. Feel free to 
 create your own configuration, you can use it as a template.
 
+If you want to run the service from IntelliJ or another IDE, just take into account that the service doesn't have an
+application.yml or configuration file by itself. You need to change the Run Configuration to specify where is the
+desired application.yml or copy the `local-env/prices-api/application.yml` to the project's root folder. 
+
 ## Local environment
 The local environment is based on docker, and uses a `docker-compose.yaml` as the descriptor, even it only starts one
 service with the Spring microservice. 
