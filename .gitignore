@@ -1,0 +1,39 @@
+## Optare NetApps Projects .gitignore Template template
+
+# IntelliJ project files
+**/*.iml
+.idea/
+out/
+gen/
+build/
+logs/
+
+# Maven output files
+target/
+
+#Maven wrapper binaries
+.mvn/wrapper/maven-wrapper.jar
+
+# Eclipse
+.project
+.classpath
+.settings/
+.metadata
+.gradle
+.checkstyle
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+
+# VS Code
+.vscode/
+
+# Local configuration
+gradle-local.properties
+
+# Temp files
+.~*.*\#
+

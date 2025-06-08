@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  prices-api:
+    image: prices-api:1.0.0-SNAPSHOT
+    hostname: prices-api
+    #entrypoint: 'java -jar -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -Dspring.config.location=/application.yml /app.jar'
+    environment:
+      DB_USER: "nondefault"
+      DB_PASSWORD: "somerandomepass"
+      ENABLE_H2_CONSOLE: "true"
+    ports:
+      - "5005:5005"
+      - "8080:8080"
+      - "8081:8081"
+    volumes:
+      - ./prices-api/application.yml:/application.yml:ro

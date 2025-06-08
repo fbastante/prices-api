@@ -1,0 +1,29 @@
+server:
+  port: 8080
+
+logging.level:
+  com.inditex.prices: DEBUG
+  org.springframework.test.jdbc.JdbcTestUtils: WARN
+  #org.springframework: DEBUG
+  #org.hibernate.SQL: DEBUG
+
+spring:
+  sql.init.data-locations:
+    - "classpath:db/data/initial-data.sql"
+    - "classpath:db/data/test-initial-data.sql"
+  jpa:
+    hibernate:
+      naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: "none"
+    properties:
+      hibernate:
+        format_sql: false
+    show-sql: false
+  flyway:
+    enabled: true
+    locations: "db/schema"
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password: password
+    driverClassName: org.h2.Driver
