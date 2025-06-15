@@ -1,4 +1,4 @@
-package com.inditex.prices.infrastructure.adapters.inbound.rest.exception;
+package com.inditex.prices.infrastructure.adapters.inbound.rest.error.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,10 +11,10 @@ import java.time.ZonedDateTime;
 @NoArgsConstructor
 @Builder
 @Data
-public class BaseErrorResponse {
+public class BaseErrorRestResponse {
 
     private ZonedDateTime timestamp;
+    private String message;
     private Integer status;
-    private String error;
     private String path;
 }

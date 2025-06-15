@@ -1,7 +1,7 @@
 package com.inditex.prices.infrastructure.adapters.inbound.rest.productprices;
 
 import com.inditex.prices.BasePricesAPIApplicationTest;
-import com.inditex.prices.infrastructure.adapters.inbound.rest.exception.BaseErrorResponse;
+import com.inditex.prices.infrastructure.adapters.inbound.rest.error.model.BaseErrorRestResponse;
 import com.inditex.prices.infrastructure.adapters.inbound.rest.productprices.model.GetProductPriceRestResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
@@ -140,11 +140,11 @@ class ProductPricesRestControllerTest extends BasePricesAPIApplicationTest {
         log.debug("testNotFound - calling GET product-prices with params {} - {} - {}", brandId, productId, date);
 
         final ZonedDateTime startTimestamp = ZonedDateTime.now();
-        final BaseErrorResponse expectedError = BaseErrorResponse.builder()
+        final BaseErrorRestResponse expectedError = BaseErrorRestResponse.builder()
                 .timestamp(ZonedDateTime.now())
                 .status(HttpStatus.NOT_FOUND.value())
                 .path(GET_PATH)
-                .error(String.format("Element ProductPrice wasn't found for values %s, %s, %s",
+                .message(String.format("Element ProductPrice wasn't found for values %s, %s, %s",
                                 brandId, productId, date))
                 .build();
 
@@ -152,12 +152,14 @@ class ProductPricesRestControllerTest extends BasePricesAPIApplicationTest {
                         .param("brandId", brandId.toString())
                         .param("productId", productId.toString())
                         .param("date", date.toString())
-                ).andReturn().getResponse().getContentAsString();
+                )
+                .andExpect(status().isNotFound())
+                .andReturn().getResponse().getContentAsString();
 
         ZonedDateTime endTimestamp = ZonedDateTime.now();
 
         log.debug("testNotFound - received response: {}", response);
-        BaseErrorResponse responseObj = objectMapper.readValue(response, BaseErrorResponse.class);
+        BaseErrorRestResponse responseObj = objectMapper.readValue(response, BaseErrorRestResponse.class);
 
         log.debug("testNotFound - mapped BaseErrorResponse object: {}", responseObj);
         assertEqualsRecursively(responseObj, expectedError, "timestamp");
