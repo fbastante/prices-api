@@ -1,0 +1,32 @@
+@startuml
+actor "api client"
+
+skinparam rectangle {
+    roundCorner 20
+}
+
+rectangle "Prices API Service" #LightGray{
+    rectangle "Infrastructure" #LightBlue;line:blue {
+        rectangle "ProductPricesRestController" #RoyalBlue;line:blue
+        rectangle "ProductPriceRepositoryDatabaseAdapter" #RoyalBlue;line:blue
+            rectangle "Application" #IndianRed;line:red {
+            rectangle "GetProductPriceUseCase" #LightSalmon;line:red
+                rectangle "Domain" #PaleGoldenRod;line:gold{
+                    rectangle "ProductPricesRepository" #Business;line:gold
+                }
+            }
+    }
+
+
+	database "h2"
+}
+
+"api client" -down-> "ProductPricesRestController" : HTTP GET
+"ProductPricesRestController" -down-> "GetProductPriceUseCase" : getProductPrice()
+"GetProductPriceUseCase" -down-> "ProductPricesRepository" : "findProductPrice()"
+"ProductPricesRepository" -down-> "ProductPriceRepositoryDatabaseAdapter" : findProductPrice()
+"ProductPriceRepositoryDatabaseAdapter" -down-> "h2": SQL
+
+@enduml
+
+
