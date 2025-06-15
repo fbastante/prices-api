@@ -1,6 +1,5 @@
 package com.inditex.prices.infrastructure.adapters.inbound.rest.productprices;
 
-import com.inditex.prices.infrastructure.adapters.inbound.rest.exception.BaseRestController;
 import com.inditex.prices.infrastructure.adapters.inbound.rest.productprices.model.GetProductPriceRestRequest;
 import com.inditex.prices.infrastructure.adapters.inbound.rest.productprices.model.GetProductPriceRestResponse;
 import com.inditex.prices.usecase.GetProductPriceUseCase;
@@ -28,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RequiredArgsConstructor
 @Slf4j
-public class ProductPricesRestController extends BaseRestController {
+public class ProductPricesRestController {
 
     private final GetProductPriceUseCase getProductPriceUseCase;
     private final ModelMapper modelMapper;
